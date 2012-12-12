@@ -1,5 +1,9 @@
 # Define all custom routes here
 routes:
     home:
-        route: /<name>
-        callback: ucwords
+        route: /
+        callback: gethostname
+
+controllers:
+    value: \Backend\Base\Controllers\ValuesController
+

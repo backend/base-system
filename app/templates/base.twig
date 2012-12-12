@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="{% block description %}{% endblock %}">
+        <meta name="author" content="J Jurgens du Toit / Jade IT">
+        <title>{% block title %}{{ applicationName|default('Backend') }}{% endblock %}</title>
+
+        <!-- Le styles -->
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ SITE_LINK }}/css/bootstrap.min.css">
+        <style>
+        body {
+            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+        }
+        </style>
+        {% endblock %}
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+            <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+
+        <!-- Le fav and touch icons -->
+        <link rel="shortcut icon" href="{{ SITE_LINK }}/img/favicon.ico">
+        <link rel="apple-touch-icon" href="{{ SITE_LINK }}/images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{ SITE_LINK }}/images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{ SITE_LINK }}/images/apple-touch-icon-114x114.png">
+    </head>
+    <body>
+        {% block navbar %}
+            <div class="navbar navbar-fixed-top">
+                <div class="navbar-inner">
+                    <div class="container">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="{{ SITE_LINK }}">{{ applicationName|default('Backend') }}</a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav">
+                            </ul>
+                        </div><!--/.nav-collapse -->
+                    </div>
+                </div>
+            </div>
+        {% endblock %}
+        <header id="header">
+            {% block header %}
+            {% endblock %}
+            {% block flash %}
+                {% set success = flash.success %}
+                {% set info = flash.info %}
+                {% set error = flash.error %}
+                {% set warning = flash.warning %}
+                <div class="container" id="flash-container">
+                    {% if success %}
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ success }}
+                        </div>
+                    {% endif %}
+                    {% if info %}
+                        <div class="alert alert-info">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ info }}
+                        </div>
+                    {% endif %}
+                    {% if error %}
+                        <div class="alert alert-error">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                    {% if warning %}
+                        <div class="alert">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            {{ warning }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endblock %}
+        </header><!-- end #header -->
+        <div id="body">
+            {% block body %}
+            {% endblock %}
+        </div><!-- end #body -->
+        <footer id="footer">
+            {% block footer %}
+                {% include 'footer.twig' %}
+            {% endblock %}
+        </footer><!-- end #footer -->
+    </body>
+</html>

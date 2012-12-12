@@ -1,0 +1,52 @@
+parameters:
+    bindings.config.file: bindings
+    connections.config.file: connections
+
+services:
+    base_listener:
+        class: \Backend\Base\Listener\BaseListener
+        arguments:
+            - @service_container
+        tags:
+            - { name: core.listener, event: core.init }
+            - { name: core.listener, event: core.request }
+            - { name: core.listener, event: core.callback }
+            - { name: core.listener, event: core.result }
+            - { name: core.listener, event: core.exception }
+            - { name: core.listener, event: core.shutdown }
+    bindings_config:
+        class: %config.class%
+        factory_class: %config.class%
+        factory_method: getNamed
+        arguments:
+            - @parser
+            - %bindings.config.file%
+    connections_config:
+        class: %backend.config.class%
+        factory_class: %config.class%
+        factory_method: getNamed
+        arguments:
+            - @parser
+            - %connections.config.file%
+    binding_factory:
+        class: \Backend\Base\Utilities\BindingFactory
+        arguments:
+            - @bindings_config
+            - @connections_config
+    renderer:
+        class: \Backend\Modules\TwigRender
+    # Formats
+    backend.base.formats.html:
+        class: \Backend\Base\Formats\Html
+        arguments:
+            - @request
+            - @application_config
+            - @renderer
+    backend.base.formats.json:
+        class: \Backend\Base\Formats\Json
+        arguments:
+            - @request
+    backend.base.formats.cli:
+        class: \Backend\Base\Formats\Cli
+        arguments:
+            - @request

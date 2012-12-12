@@ -1,0 +1,4 @@
+# Set DB Connections here
+default:
+    driver: sqlite
+    path: /tmp/backend.sqlite

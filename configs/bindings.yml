@@ -1,0 +1,4 @@
+default:
+    type: \Backend\Modules\Bindings\PDOBinding
+    connection: default
+    table: values

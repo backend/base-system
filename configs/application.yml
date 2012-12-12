@@ -1,4 +1,5 @@
 imports:
     - { resource: core_services }
+    - { resource: base_services }
 
 application:
