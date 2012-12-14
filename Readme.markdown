@@ -30,3 +30,10 @@ The base system includes the Backend-Base tier that provides basic application
 functionality straight out of the box. It uses a couple of third party components
 to provide functionality such as logging, email sending, dependency injection
 and event management.
+
+The base system is ideal for projects using multiple content types and data sources.
+
+Next Step
+---------
+
+For more information, read the documentation on http://backend-php.net
